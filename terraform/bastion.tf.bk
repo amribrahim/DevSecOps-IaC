@@ -1,0 +1,40 @@
+data "aws_ami" "ubuntu-bastion" {
+   most_recent = true
+
+   filter {
+        name   = "name"
+        values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+    }
+
+    filter {
+        name   = "virtualization-type"
+        values = ["hvm"]
+    }
+
+   owners = ["099720109477"] # Canonical
+}
+
+
+resource "aws_instance" "bastion-instance" {
+  ami           = "${data.aws_ami.ubuntu-bastion.id}"
+  instance_type = "t2.micro"
+  subnet_id = "${aws_subnet.prod-pub-1.id}"
+  key_name = "${aws_key_pair.deployer.id}"
+  vpc_security_group_ids = [
+     "${aws_security_group.bastion.id}","${aws_securit
+_group.ec2.id}" ]
+       
+  
+
+
+
+  tags = {
+    Name = "bastion"
+  }
+}
+
+
+
+
+
+

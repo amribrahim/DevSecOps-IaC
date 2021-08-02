@@ -1,0 +1,19 @@
+resource "aws_eip" "nile-nat" {
+tags = {
+    Name = "nile-nat"
+  }
+}
+
+
+resource "aws_nat_gateway" "nile-ngw" {
+  allocation_id = "${aws_eip.nile-nat.id}"
+  subnet_id     = "${aws_subnet.prod-pub-1.id}"
+
+  tags = {
+    Name = "Nile-NAT"
+  }
+}
+
+
+
+

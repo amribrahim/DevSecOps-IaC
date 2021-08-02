@@ -1,0 +1,15 @@
+- name: installapacheserver
+  hosts: servers
+  gather_facts: true
+  become: true
+  tasks: 
+    - name: update repo
+      command:  sudo apt update -y
+    - name: install apache
+      command:  sudo apt install apache2 -y
+
+    - name: start apache2
+      command:  sudo systemctl start apache2 
+
+    - name: setup index file
+      shell:  printf 'Hello world' > /var/www/html/index.html
