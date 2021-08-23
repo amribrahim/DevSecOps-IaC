@@ -45,6 +45,15 @@ resource "aws_security_group_rule" "to_instance" {
   source_security_group_id="${aws_security_group.SG-loadbalancer.id}"
 }
 
+resource "aws_security_group_rule" "ssh_instance" {
+security_group_id = "${aws_security_group.SG-instance.id}"
+type = "ingress"
+from_port = "22"
+to_port = "22"
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
+
 resource "aws_security_group_rule" "ec2_all" {
   security_group_id = "${aws_security_group.SG-instance.id}"
   description = "Allow All Traffic Among VPC Instances"

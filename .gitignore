@@ -1,1 +1,2 @@
 terraform/.terraform/
+remote_statefile/.terraform/

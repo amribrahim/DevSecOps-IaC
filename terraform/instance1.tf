@@ -19,7 +19,8 @@ resource "aws_instance" "first_instance" {
   instance_type = "t2.micro"
 #  private_ip ="172.31.35.105"
   subnet_id = "${aws_subnet.prod-pub-1.id}"
-  key_name = "${aws_key_pair.deployer.id}"
+#  key_name = "${aws_key_pair.deployer.id}"
+   key_name = "key.pem"
  # iam_instance_profile = "${aws_iam_instance_profile.code_deploy.name}"
   vpc_security_group_ids = ["${aws_security_group.SG-instance.id}"]
        
