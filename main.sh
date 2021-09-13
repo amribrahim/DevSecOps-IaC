@@ -5,7 +5,7 @@ function install_enviroment {
   chmod 777 key.pem
   aws ssm get-parameter --name "key.pem" --with-decryption --output text --query Parameter.Value > key.pem
   terraform apply -auto-approve
-  rm -rf ips.txt key.pem
+  sudo rm -rf key.pem
   cd /home/ubuntu/DevSecOps-IaC/helper_scripts
   ./dynamic_inventory.sh
   cd /home/ubuntu/DevSecOps-IaC/ansible
@@ -22,10 +22,10 @@ for arg in "$@"; do
   fi
   if [[ "$arg" = --destroy-enviroment ]]; then
      cd terraform
-     terraform destroy 
+     terraform destroy
   fi
   if [[ "$arg" = --plan-enviroment ]]; then
      cd terraform
      terraform plan
   fi
-done 
+done
